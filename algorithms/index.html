@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Text Justification</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@600&display=swap" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" href="css/mdb.min.css">
+    <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<!-- -->
+
+<body>
+    <div class="container-fluid ">
+        <div class="row">
+            <!--Side Bar-->
+            <div class="col-sm-4" style="height:100vh;">
+                <!--Title-->
+                <div class="row title1" style=" background-image:url(Untitled.png); ;height:17%">
+                    <div class="col-11">
+                        <p style="font-size:2.5vw;"><b>Text Justification</b></p>
+                        <p style="font-size:1vw;">Using Dynamic Programming</p>
+                    </div>
+                </div>
+                <!--inputs-->
+                <div class="row title1" style=" background-image:url(Untitled2.png); height:83%">
+                    <!-- input paragraph-->
+                    <div class="form-group" id="inputs" style="width:80%; padding: 2%;padding-top: 10%;">
+                        <label for="text">Input Your Paragraph</label>
+                        <textarea class="form-control" id="text" rows="7" maxlength="300" style="background-color: #e0e0e0;" placeholder="maximum 300 characters"></textarea>
+
+                        <!--max char-->
+                        <div style="padding-top: 5px;">
+                            <label for="number">Maximun Characters in Each Line</label>
+                            <input type="number" id="number" min="1" value="20" class="form-control" style="background-color: #e0e0e0;">
+                        </div>
+                        <!--Buttons-->
+                        <div style="padding-top: 20%;">
+                            <button type="button" class="btn btn-light" id="visualize">Visualize</button>
+                            <button type="button" class="btn btn-light" id="quick">Quick Answer</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="pseudocode" style="width:84%; padding: 2%;padding-top: 10%; display:none">
+                        <button type="button" class="btn btn-elegant">pause</button>
+                        <form class="range-field">
+                            <input type="range" min="0" max="100" />
+                        </form>
+                        <div style="background-color: #333333; padding: 4%">
+                            <div class="kalam">length=number of words</div>
+                            <div class="kalam">space[length][length] => fill it with 0 </div>
+                            <div class="kalam">for i in range length: </div>
+                            <div class="kalam"> &nbsp;&nbsp; space[i]=maxlength-word[i]</div>
+                            <div class="kalam">&nbsp;&nbsp; for j in range (i => length)</div>
+                            <div class="kalam">&nbsp;&nbsp;&nbsp;&nbsp; space[i][j]=space[i][j-1]-word[j]-1</div>
+                            <div class="kalam">cost[length][length] => fill it with 0 </div>
+                            <div class="kalam">if space &lt; 0: set its corsponding cost value to ∞</div>
+                            <div class="kalam">else rise value to the power of 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--Home-->
+            <div class="col-sm-8 " style=" height:100vh ;width: 100%;text-align: center;" id="home">
+
+                <div class="row screen">
+                    <h2 style="white-space: pre;">
+                        <br>Text Justification (Dynamic<br> Programming) Algorithm ensures<br> to justify a text in a way<br> that all the lines combined<br> have as smaller gabs as<br> possible, where lines have a<br> miximum characters constraint
+                    </h2>
+                </div>
+                <div class="row screen">
+                    <div class="card" style="background-image: url(right.png);"></div>
+                    <div class="card" style="background-image: url(wrong.png);"></div>
+                </div>
+            </div>
+
+            <!-- -->
+            <div class="col-sm-8 " style=" height:100vh ;width: 100%;text-align: center;display: flex; justify-content: center; padding-top:10%">
+                <div id="container1">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- End your project here-->
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Your custom scripts (optional) -->
+    <script type="text/javascript" src="javascript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js"></script>
+
+</body>
+
+</html>
