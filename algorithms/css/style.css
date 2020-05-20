@@ -1,7 +1,7 @@
 div {}
 
 body {
-    background-color: #f2e9e4;
+    background-color: #525252;
     color: #E9DFE5;
     font-family: 'Baloo Bhaina 2', cursive;
     text-align: center;
@@ -27,17 +27,21 @@ body {
     margin: 10px;
 }
 
-#home {
-    display: none;
-}
+#home {}
 
 .hidden {
     display: none;
 }
 
 .kalam {
-    text-align: left;
+    text-align: left !important;
+    position: relative;
+    left: 0px;
+    margin: 1px;
+    font-size: small;
 }
+
+span {}
 
 table {
     position: absolute;
@@ -46,11 +50,46 @@ table {
     color: #E9DFE5;
     border-radius: 5%;
     border-style: hidden;
-    box-shadow: 0 0 0 1px
+    box-shadow: 0 0 0 1px;
+    opacity: 0;
 }
 
 #container1 {}
 
 td {
     padding: 5px
+}
+
+.margin1 {
+    margin-bottom: 2%;
+}
+
+#pp,
+#c {
+    margin: 5px
+}
+
+.borderr {
+    border: 1px solid black
+}
+
+.pic1:hover {
+    background-color: #9bc53d;
+}
+
+.pic2:hover {
+    background-color: #E07A5F;
+}
+
+.pseudo {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 4%;
+    height: 83%;
+    overflow: auto;
+    margin-bottom: 4px;
+    border: 4px solid #E9DFE5;
+    border-radius: 5%;
+    width: 80%
 }

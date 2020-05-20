@@ -26,20 +26,20 @@
     <div class="container-fluid ">
         <div class="row">
             <!--Side Bar-->
-            <div class="col-sm-4" style="height:100vh;">
+            <div class="col-sm-4" style="height: 100vh; position: fixed; z-index: 1; ">
                 <!--Title-->
-                <div class="row title1" style=" background-image:url(Untitled.png); ;height:17%">
-                    <div class="col-11">
-                        <p style="font-size:2.5vw;"><b>Text Justification</b></p>
-                        <p style="font-size:1vw;">Using Dynamic Programming</p>
+                <div class="row title1" style=" background-image:url(Untitled.png); ;height:17;">
+                    <div class="col-11" style="width:100%">
+                        <p style="font-size:2.5em; margin-bottom: -1%;"><b>Text Justification</b></p>
+                        <p style="font-size:1.5em;">Using Dynamic Programming</p>
                     </div>
                 </div>
                 <!--inputs-->
-                <div class="row title1" style=" background-image:url(Untitled2.png); height:83%">
-                    <!-- input paragraph-->
-                    <div class="form-group" id="inputs" style="width:80%; padding: 2%;padding-top: 10%;">
+                <div class="row title1" id="sidebar" style=" background-image:url(Untitled2.png); height:83%">
+                    <!-- input-->
+                    <div class="form-group" id="inputs" style="width:80%; padding: 2%;">
                         <label for="text">Input Your Paragraph</label>
-                        <textarea class="form-control" id="text" rows="7" maxlength="300" style="background-color: #e0e0e0;" placeholder="maximum 300 characters"></textarea>
+                        <textarea class="form-control" id="text" rows="7" maxlength="300" style="background-color: #e0e0e0;" placeholder="maximum 300 characters. If you don't insert anything a default text will be used"></textarea>
 
                         <!--max char-->
                         <div style="padding-top: 5px;">
@@ -49,49 +49,88 @@
                         <!--Buttons-->
                         <div style="padding-top: 20%;">
                             <button type="button" class="btn btn-light" id="visualize">Visualize</button>
-                            <button type="button" class="btn btn-light" id="quick">Quick Answer</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group" id="pseudocode" style="width:84%; padding: 2%;padding-top: 10%; display:none">
-                        <button type="button" class="btn btn-elegant">pause</button>
-                        <form class="range-field">
-                            <input type="range" min="0" max="100" />
-                        </form>
-                        <div style="background-color: #333333; padding: 4%">
-                            <div class="kalam">length=number of words</div>
-                            <div class="kalam">space[length][length] => fill it with 0 </div>
-                            <div class="kalam">for i in range length: </div>
-                            <div class="kalam"> &nbsp;&nbsp; space[i]=maxlength-word[i]</div>
-                            <div class="kalam">&nbsp;&nbsp; for j in range (i => length)</div>
-                            <div class="kalam">&nbsp;&nbsp;&nbsp;&nbsp; space[i][j]=space[i][j-1]-word[j]-1</div>
-                            <div class="kalam">cost[length][length] => fill it with 0 </div>
-                            <div class="kalam">if space &lt; 0: set its corsponding cost value to ∞</div>
-                            <div class="kalam">else rise value to the power of 2</div>
+                            <button type="button" class="btn btn-light" id="quick" onclick="finalAnswer()">Quick Answer</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- controllers-->
+            <div class="col-sm-12" style="position: fixed; z-index: 1;   bottom: 0;display: none; background-color: #313131; padding-top: 5px; margin:2px" id="controller">
+                <button type="button" class=" " onclick="skipB()"><i class="fas fa-fast-backward"></i></button>
+                <button type="button" class=" " onclick="pause()"><i class="fas fa-pause"></i></button>
+                <button type="button" class=" " onclick="play()"><i class="fas fa-play"></i></button>
+                <button type="button" class=" " onclick="restart()"><i class="fas fa-redo-alt"></i></button>
+                <button type="button" class=" " onclick="skipF()"><i class="fas fa-fast-forward"></i></button>
 
+                <label for="speeder">slow</label>
+                <input class="col-1 custom-range" type="range" min=".1" max="10" id="speeder" name="speeder" style="margin:2px" onchange="speed()" />
+                <label for="speeder">fast</label>
 
+                <input class="col-sm-6 custom-range" type="range" min="0" max="100" id="slider" onchange="slide()" />
+
+            </div>
+            <!--pseudocode-->
+            <div class="col-sm-4">
+                <div style="height:18%"></div>
+                <div class="form-group" id="pseudocode" style="height:80%; display:none">
+                    <div class="pseudo">
+                        <span class="kalam">length=len(words)</span>
+                        <span class="kalam margin1">create space[length][length] => fill it with 0 </span>
+                        <span class="kalam">for i in range length: </span>
+                        <span class="kalam"> &nbsp;&nbsp;&nbsp; space[i]=maxlength-word[i]</span>
+                        <span class="kalam">&nbsp;&nbsp;&nbsp; for j in range (i => length)</span>
+                        <span class="kalam margin1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; space[i][j]=space[i][j-1]-word[j]-1</span>
+                        <span class="kalam margin1">create cost[length][length] => fill it with 0 </span>
+                        <span class="kalam">if space &lt; 0: set its corsponding cost value to ∞</span>
+                        <span class="kalam margin1">else rise value to the power of 2</span>
+                        <span class="kalam"></span>
+                        <span class="kalam"></span>
+                        <span class="kalam">for j in range length: </span>
+                        <span class="kalam"> &nbsp;&nbsp;&nbsp; c[j]=infinity</span>
+                        <span class="kalam">&nbsp;&nbsp;&nbsp; for i in range length:</span>
+                        <span class="kalam">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if c[i - 1] is not infinity AND <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cost[i][j] is not infinity AND <br>&nbsp;&nbsp;&nbsp;&nbsp;(c[i - 1] + cost[i][j]) is less than c[j]</span>
+                        <span class="kalam margin1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c[j] = c[i - 1] + cost[i][j]; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p[j] = i;</span>
+                        <span class="kalam">if (p[x] != 1):</span>
+                        <span class="kalam">&nbsp;&nbsp;&nbsp;while (p[x] != 1) :</span>
+                        <span class="kalam">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; answer.push(x);</span>
+                        <span class="kalam"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x = p[x] - 1;</span>
+                        <span class="kalam">for (i=length(answer)-1;i>=0;i--):</span>
+                        <span class="kalam">&nbsp;&nbsp;&nbsp; continue printing words untill answer[i] and start a new line</span>
+
+                    </div>
+                </div>
+            </div>
 
             <!--Home-->
             <div class="col-sm-8 " style=" height:100vh ;width: 100%;text-align: center;" id="home">
 
                 <div class="row screen">
-                    <h2 style="white-space: pre;">
+                    <h2 style="white-space: pre; ">
                         <br>Text Justification (Dynamic<br> Programming) Algorithm ensures<br> to justify a text in a way<br> that all the lines combined<br> have as smaller gabs as<br> possible, where lines have a<br> miximum characters constraint
                     </h2>
                 </div>
                 <div class="row screen">
-                    <div class="card" style="background-image: url(right.png);"></div>
-                    <div class="card" style="background-image: url(wrong.png);"></div>
+                    <div class="card pic1" style="background-image: url(right.png);"></div>
+                    <div class="card pic2" style="background-image: url(wrong.png);"></div>
                 </div>
             </div>
+            <div class="col-sm-8 " style=" height:100vh ;width: 100%;text-align: center;color:#333333;display: flex; justify-content: center;align-items: center; display:none" id="final">
+                <div class="card" style="width:75%; height: 75%;display: flex; justify-content: center;align-items: center;  font-size :150%; z-index: 1;" id="answerr">
 
-            <!-- -->
-            <div class="col-sm-8 " style=" height:100vh ;width: 100%;text-align: center;display: flex; justify-content: center; padding-top:10%">
-                <div id="container1">
+                </div>
+            </div>
+            <!--Solution-->
+            <div class="col-sm-8" id="show" style=" height:100vh ;width: 100%;text-align: center;display: flex; justify-content: center; padding-top:10%;display:none">
+                <div id="container1" style="width:100%">
+                    <div class="row" id="spaces"> </div>
+                    <div class="row" id="cost"> </div>
+                    <div class="row" id="pnc">
+                        <div class="" id="pp"></div>
+                        <div class="" id="c"></div>
+                        <div class="" id="ans"></div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
